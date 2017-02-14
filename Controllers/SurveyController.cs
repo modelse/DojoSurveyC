@@ -5,8 +5,9 @@ namespace ConsoleApplication.Controllers
 {
  public class SurveyController : Controller
  {
+   //Index method of your aspp's first route is usually just "" for the home route
   [HttpGet]
-  [Route("index")]
+  [Route("")]
   public IActionResult Index()
   {
    return View();
@@ -16,7 +17,9 @@ namespace ConsoleApplication.Controllers
   }
   [HttpPost]
   [Route("survey")]
-  public IActionResult Method(string name, string location, string language, string comment)
+  //Method is not a great method name~!
+  // public IActionResult Method(string name, string location, string language, string comment)
+  public IActionResult SurveyResults(string name, string location, string language, string comment)
   {
     ViewBag.Name= name;
     ViewBag.Location= location;
@@ -30,8 +33,11 @@ namespace ConsoleApplication.Controllers
   [Route("goback")]
   public IActionResult GoBack()
   {
-    return View("index");
-  //Code Here
+    //Instead of loading a view from here you can use a redirect
+    //return View("index");
+    return RedirectToAction("Index");
+
+    //Note I also added an <a> tag to your view to show you don't need to make a post request for this :)
   }
  }
 }
